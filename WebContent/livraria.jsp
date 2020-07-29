@@ -22,7 +22,7 @@
 		<hr>
 		<p><b>Livraria Online</b></p>
 		<c:url var="url" value="/livros/catalogo" />
-		<p><b><a href="${url}">Iniciar compras</a></b></p>
+		<p><b><a href="${url}?Add=">Iniciar compras</a></b></p>
 	</div>
 	<div>
 		<em>Copyright &copy; 2020 Livraria Virtual</em>

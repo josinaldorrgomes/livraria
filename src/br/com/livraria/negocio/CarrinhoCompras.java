@@ -1,20 +1,25 @@
 package br.com.livraria.negocio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CarrinhoCompras {
 
 	Map<String, ItemCompra> itens;
+	
+	public CarrinhoCompras() {
+		itens = new HashMap<String, ItemCompra>();
+	}
 
-	public synchronized void adicionar(Livro book) {
-		if (itens.containsKey(book.getIdLivro())) {
-			ItemCompra item = itens.get(book.getIdLivro());
+	public synchronized void adicionar(Livro livro) {
+		if (itens.containsKey(livro.getIdLivro())) {
+			ItemCompra item = itens.get(livro.getIdLivro());
 			item.incrementaQuantidade();
 		} else {
-			ItemCompra novoItem = new ItemCompra(book);
-			itens.put(book.getIdLivro(), novoItem);
+			ItemCompra novoItem = new ItemCompra(livro);
+			itens.put(livro.getIdLivro(), novoItem);
 		}
 	}
 	
@@ -30,6 +35,7 @@ public class CarrinhoCompras {
 	
 	public synchronized List<ItemCompra> getItens() {
 		List<ItemCompra> resultado = new ArrayList<ItemCompra>();
+		resultado.addAll(this.itens.values());
 		return resultado;
 	}
 	
@@ -48,8 +54,8 @@ public class CarrinhoCompras {
 	public synchronized double getTotal() {
 		double total = 0.0;
 		for (ItemCompra item : getItens()) {
-			Livro book = item.getItem();
-			total += item.getQuantidade() * book.getPreco();
+			Livro livro = item.getItem();
+			total += (item.getQuantidade() * livro.getPreco());
 		}
 		return total;
 	}

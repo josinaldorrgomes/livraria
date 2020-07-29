@@ -6,9 +6,12 @@ public class LivrariaBean {
 
 	private Livraria sistema = null;
 	private String idLivro = "0";
+	
+	public LivrariaBean() {
+	}
 
-	public void setSistema(Livraria sistema) {
-		this.sistema = sistema;
+	public void setSistema(Livraria livraria) {
+		this.sistema = livraria;
 	}
 
 	public void setIdLivro(String idLivro) {

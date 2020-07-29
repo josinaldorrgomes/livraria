@@ -19,8 +19,9 @@
 		</h1>
 	</div>
 	<div>
-		<jsp:useBean id="livrariaBean" class="br.com.livraria.negocio.LivrariaBean"/>
-		<jsp:setProperty property="sistema" name="livrariaBean" value="${sistemaLivraria}"/>
+		<jsp:useBean id="livrariaBean" class="br.com.livraria.negocio.LivrariaBean" scope="page">
+			<jsp:setProperty property="sistema" name="livrariaBean" value="${sistemaLivraria}"/>
+		</jsp:useBean>
 		<c:if test="${not empty param.Add}">
 			<c:set var="idL" value="${param.Add}"/>
 			<jsp:setProperty property="idLivro" name="livrariaBean" value="${idL}"/>

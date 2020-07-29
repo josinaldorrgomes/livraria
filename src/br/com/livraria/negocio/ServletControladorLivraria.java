@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "controlador", urlPatterns = { "/livraria", "/catalogo" })
+@WebServlet(name = "Controlador", urlPatterns = { "/livraria", "/catalogo" })
 public class ServletControladorLivraria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class ServletControladorLivraria extends HttpServlet {
 		}
 
 		String acaoSelecionada = request.getServletPath();
-		String tela = acaoSelecionada + ",jsp";
+		String tela = acaoSelecionada + ".jsp";
 
 		try {
 			request.getRequestDispatcher(tela).forward(request, response);

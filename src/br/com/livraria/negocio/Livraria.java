@@ -1,6 +1,8 @@
 package br.com.livraria.negocio;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -15,24 +17,23 @@ public class Livraria {
 	}
 	
 	private void popularLivros() {
-		Livro livro = new Livro();
-		livro.setIdLivro("0596005407");
-		livro.setAno(2008);
-		livro.setTitulo("Head First Servlets and JSP");
-		livro.setDescricao("Livro sobre Servlets e JSP");
-		livro.setAutores("Bryan Basham, Kathy Sierra, Bert Bates");
-		livro.setQuantidade(10);
-		livro.setPreco(200.5);
-		estoqueLivros.add(livro);
-		livro = new Livro();
-		livro.setIdLivro("9788573935721");
-		livro.setAno(2007);
-		livro.setTitulo("Desenvolvendo Aplicações Web com JSP, Servlets, JavaServer Faces, Hibernate, EJB 3 e AJAX");
-		livro.setDescricao("Livro sobre tecnologias usadas na programação Java para Web");
-		livro.setAutores("Edson Gonçalves");
-		livro.setQuantidade(10);
-		livro.setPreco(110.9);
-		estoqueLivros.add(livro);
+		Livro livro1 = new Livro();
+		livro1.setIdLivro("0596005407");
+		livro1.setAno(2008);
+		livro1.setTitulo("Head First Servlets and JSP");
+		livro1.setDescricao("Livro sobre Servlets e JSP");
+		livro1.setAutores("Bryan Basham, Kathy Sierra, Bert Bates");
+		livro1.setQuantidade(10);
+		livro1.setPreco(200.5);
+		Livro livro2 = new Livro();
+		livro2.setIdLivro("9788573935721");
+		livro2.setAno(2007);
+		livro2.setTitulo("Desenvolvendo Aplicações Web com JSP, Servlets, JavaServer Faces, Hibernate, EJB 3 e AJAX");
+		livro2.setDescricao("Livro sobre tecnologias usadas na programação Java para Web");
+		livro2.setAutores("Edson Gonçalves");
+		livro2.setQuantidade(10);
+		livro2.setPreco(110.9);
+		estoqueLivros.addAll(Arrays.asList(livro1, livro2));
 	}
 	
 	public List<Livro> getLivros() {
@@ -41,9 +42,9 @@ public class Livraria {
 	
 	public Livro getLivro(String idLivro)  throws LivroNaoEncontradoException {
 		Livro livroProcurado = null;
-		for (Livro book : estoqueLivros) {
-			if (book.getIdLivro().equals(idLivro)) {
-				livroProcurado = book;
+		for (Livro livro : estoqueLivros) {
+			if (livro.getIdLivro().equals(idLivro)) {
+				livroProcurado = livro;
 			}
 		}
 		if (livroProcurado == null) {
@@ -53,14 +54,14 @@ public class Livraria {
 	}
 	
 	public void comprarLivros(CarrinhoCompras carrinho) throws CompraException {
-		List<ItemCompra> itens = carrinho.getItens();
+		Collection<ItemCompra> itens = carrinho.getItens();
 		Iterator<ItemCompra> i = itens.iterator();
 		while (i.hasNext()) {
 			ItemCompra item = i.next();
 			Livro livro = item.getItem();
 			String id = livro.getIdLivro();
 			int quantidade = item.getQuantidade();
-			comprarLivro(id, quantidade);
+			this.comprarLivro(id, quantidade);
 			
 		}
 	}
