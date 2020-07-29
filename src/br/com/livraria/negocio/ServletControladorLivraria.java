@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "/controlador", urlPatterns = "/livraria")
+@WebServlet(name = "controlador", urlPatterns = { "/livraria", "/catalogo" })
 public class ServletControladorLivraria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,22 +20,21 @@ public class ServletControladorLivraria extends HttpServlet {
 		Livraria livraria = (Livraria) getServletContext().getAttribute(LivrariaContextListener.SISTEMA_LIVRARIA);
 		HttpSession session = request.getSession();
 		CarrinhoCompras carrinho = (CarrinhoCompras) session.getAttribute("cart");
-		
+
 		if (carrinho == null) {
-			carrinho  = new CarrinhoCompras();
+			carrinho = new CarrinhoCompras();
 			session.setAttribute("cart", carrinho);
 		}
-		
+
 		String acaoSelecionada = request.getServletPath();
-		
 		String tela = acaoSelecionada + ",jsp";
-		
+
 		try {
 			request.getRequestDispatcher(tela).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
